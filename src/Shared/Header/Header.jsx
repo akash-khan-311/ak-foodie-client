@@ -114,7 +114,9 @@ const Header = () => {
           {user ? (
             <div className="flex items-center">
               <div className="flex items-center border px-2 py-1 rounded">
-                <h3 className="text-xl font-bold mr-2 ">{user.displayName}</h3>
+                <h3 className="text-lg font-semibold mr-2 ">
+                  {user.displayName}
+                </h3>
                 <Avatar
                   src={`${
                     user.photoURL

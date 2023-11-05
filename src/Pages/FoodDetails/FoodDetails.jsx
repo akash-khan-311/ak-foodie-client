@@ -32,6 +32,10 @@ const FoodDetails = () => {
   const [size, setSize] = useState(null);
 
   const handleOpen = (value) => setSize(value);
+
+  const handleRequestFood = (e) => {
+    e.preventDefault();
+  };
   return (
     <div>
       <Headroom>
@@ -95,27 +99,20 @@ const FoodDetails = () => {
               Request Food
             </Button>
             <Dialog
-              className="backdrop-blur-md bg-white/10"
-              open={
-                size === "xs" ||
-                size === "sm" ||
-                size === "md" ||
-                size === "lg" ||
-                size === "xl" ||
-                size === "xxl"
-              }
+              className="backdrop-blur-md bg-white/20 "
+              open={size === "xl"}
               size={size || "md"}
               handler={handleOpen}
             >
-              <DialogHeader>
+              <DialogHeader className="text-white">
                 More Details Of-
                 <span className="text-orange-700"> {foodName}</span>
               </DialogHeader>
               <DialogBody className="">
-                <form>
+                <form onSubmit={handleRequestFood}>
                   {/* form name and quantity Row */}
                   <div className="md:flex gap-10 my-5">
-                    <div class="form-control w-full md:w-1/2">
+                    <div className="form-control w-full md:w-1/2">
                       <div className="relative h-10 w-full min-w-[200px] mb-5 md:mb-0">
                         <input
                           required
@@ -130,7 +127,7 @@ const FoodDetails = () => {
                         </label>
                       </div>
                     </div>
-                    <div class="form-control w-full md:w-1/2">
+                    <div className="form-control w-full md:w-1/2">
                       <div className="relative h-10 w-full min-w-[200px] ">
                         <input
                           required
@@ -147,7 +144,7 @@ const FoodDetails = () => {
                   </div>
                   {/* form name and quantity Row */}
                   <div className="md:flex gap-10 my-5">
-                    <div class="form-control w-full md:w-1/2">
+                    <div className="form-control w-full md:w-1/2">
                       <div className="relative h-10 w-full min-w-[200px] mb-5 md:mb-0">
                         <input
                           required
@@ -162,7 +159,7 @@ const FoodDetails = () => {
                         </label>
                       </div>
                     </div>
-                    <div class="form-control w-full md:w-1/2">
+                    <div className="form-control w-full md:w-1/2">
                       <div className="relative h-10 w-full min-w-[200px] ">
                         <input
                           required
@@ -180,7 +177,7 @@ const FoodDetails = () => {
                   </div>
                   {/* form supliyer and taste Row */}
                   <div className="md:flex gap-10 my-5">
-                    <div class="form-control w-full md:w-1/2">
+                    <div className="form-control w-full md:w-1/2">
                       <div className="relative h-10 w-full min-w-[200px]  mb-5 md:mb-0">
                         <input
                           required
@@ -195,7 +192,7 @@ const FoodDetails = () => {
                         </label>
                       </div>
                     </div>
-                    <div class="form-control w-full md:w-1/2">
+                    <div className="form-control w-full md:w-1/2">
                       <div className="relative h-10 w-full min-w-[200px]">
                         <input
                           required
@@ -213,7 +210,7 @@ const FoodDetails = () => {
                   </div>
                   {/* form Row */}
                   <div className="md:flex gap-10 my-5">
-                    <div class="form-control w-full md:w-1/2">
+                    <div className="form-control w-full md:w-1/2">
                       <div className="relative h-10 w-full min-w-[200px]  mb-5 md:mb-0">
                         <input
                           required
@@ -229,7 +226,7 @@ const FoodDetails = () => {
                         </label>
                       </div>
                     </div>
-                    <div class="form-control w-full md:w-1/2">
+                    <div className="form-control w-full md:w-1/2">
                       <div className="relative h-10 w-full min-w-[200px]">
                         <input
                           required
@@ -246,7 +243,7 @@ const FoodDetails = () => {
                   </div>
                   {/* form Row */}
                   <div className="flex gap-10 my-5">
-                    <div class="form-control w-full ">
+                    <div className="form-control w-full ">
                       <div className="relative h-10 w-full min-w-[200px]">
                         <input
                           required
@@ -269,7 +266,7 @@ const FoodDetails = () => {
                     className="w-full"
                     color="orange"
                   >
-                    Add Food
+                    Request Food
                   </Button>
                 </form>
               </DialogBody>

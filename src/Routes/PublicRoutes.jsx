@@ -15,7 +15,11 @@ const Router = createBrowserRouter([
     element: <Root />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/availablefood", element: <AvailableFood /> },
+      {
+        path: "/availablefood",
+        element: <AvailableFood />,
+        loader: () => fetch("http://localhost:3000/api/v1/availablefoods"),
+      },
       { path: "/addfood", element: <AddFood /> },
       { path: "/managefood", element: <ManageFood /> },
       { path: "/foodrequest", element: <ManageFood /> },
