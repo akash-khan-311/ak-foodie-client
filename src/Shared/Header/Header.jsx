@@ -60,7 +60,7 @@ const Header = () => {
           className="p-1 font-medium"
         >
           <NavLink
-            to={"/available"}
+            to={"/availablefood"}
             className="flex items-center hover:text-orange-700 transition-colors"
           >
             Available Foods
