@@ -25,7 +25,7 @@ const AvailableFood = () => {
     );
     setFilteredData(result);
   };
-  console.log(filteredData);
+
   return (
     <div>
       <Headroom>
