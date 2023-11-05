@@ -5,14 +5,14 @@ import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Register = () => {
-  const { register, updateUserProfile } = useContext(AuthContext);
-  const [profileImg, setProfileImg] = useState(null);
+  const { register, updateUserProfile, googleLogin } = useContext(AuthContext);
 
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
+    const image = form.image.value;
     const password = form.password.value;
 
     if (name.length === 0) {
@@ -37,14 +37,14 @@ const Register = () => {
       return;
     } else if (!/^(?=.*[!@#$%^&*])/.test(password)) {
       toast.error("Paassword Must Have a Special Character");
-    } else if (profileImg === null) {
-      toast.error("please upload your profile image");
+    } else if (image.length === 0) {
+      toast.error("Image URL is empty");
     }
 
     register(email, password).then((result) => {
       const user = result.user;
       toast.success("Registration Success");
-      updateUserProfile(name, profileImg)
+      updateUserProfile(name)
         .then()
         .catch((err) => {
           toast.error(err.message);

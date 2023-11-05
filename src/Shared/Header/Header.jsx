@@ -4,99 +4,17 @@ import {
   IconButton,
   Input,
   Button,
+  Avatar,
+  Tooltip,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import logo from "../../assets/images/Logo.png";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
-
-const NavList = () => {
-  return (
-    <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="white"
-        className="p-1 font-medium"
-      >
-        <NavLink
-          to={"/"}
-          className="flex items-center hover:text-orange-700 transition-colors"
-        >
-          Home
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="white"
-        className="p-1 font-medium"
-      >
-        <NavLink
-          to={"/available"}
-          className="flex items-center hover:text-orange-700 transition-colors"
-        >
-          Available Foods
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="white"
-        className="p-1 font-medium"
-      >
-        <NavLink
-          to={"/addfood"}
-          className="flex items-center hover:text-orange-700 transition-colors"
-        >
-          Add Food
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="white"
-        className="p-1 font-medium"
-      >
-        <NavLink
-          to={"/managefood"}
-          className="flex items-center hover:text-orange-700 transition-colors"
-        >
-          Manage My Foods
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="white"
-        className="p-1 font-medium"
-      >
-        <NavLink
-          to={"/foodrequest"}
-          className="flex items-center hover:text-orange-700 transition-colors"
-        >
-          My Food Request
-        </NavLink>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="white"
-        className="p-1 font-medium"
-      >
-        <NavLink
-          to={"/login"}
-          className="flex items-center hover:text-orange-700 transition-colors"
-        >
-          <Button size="sm" variant="gradient">
-            Login
-          </Button>
-        </NavLink>
-      </Typography>
-    </ul>
-  );
-};
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const Header = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -111,6 +29,123 @@ const Header = () => {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout().then(() => {
+      toast.success("logout successful");
+    });
+  };
+  const NavList = () => {
+    return (
+      <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+        <Typography
+          as="li"
+          variant="small"
+          color="white"
+          className="p-1 font-medium"
+        >
+          <NavLink
+            to={"/"}
+            className="flex items-center hover:text-orange-700 transition-colors"
+          >
+            Home
+          </NavLink>
+        </Typography>
+        <Typography
+          as="li"
+          variant="small"
+          color="white"
+          className="p-1 font-medium"
+        >
+          <NavLink
+            to={"/available"}
+            className="flex items-center hover:text-orange-700 transition-colors"
+          >
+            Available Foods
+          </NavLink>
+        </Typography>
+        <Typography
+          as="li"
+          variant="small"
+          color="white"
+          className="p-1 font-medium"
+        >
+          <NavLink
+            to={"/addfood"}
+            className="flex items-center hover:text-orange-700 transition-colors"
+          >
+            Add Food
+          </NavLink>
+        </Typography>
+        <Typography
+          as="li"
+          variant="small"
+          color="white"
+          className="p-1 font-medium"
+        >
+          <NavLink
+            to={"/managefood"}
+            className="flex items-center hover:text-orange-700 transition-colors"
+          >
+            Manage My Foods
+          </NavLink>
+        </Typography>
+        <Typography
+          as="li"
+          variant="small"
+          color="white"
+          className="p-1 font-medium"
+        >
+          <NavLink
+            to={"/foodrequest"}
+            className="flex items-center hover:text-orange-700 transition-colors"
+          >
+            My Food Request
+          </NavLink>
+        </Typography>
+        <Typography
+          as="li"
+          variant="small"
+          color="white"
+          className="p-1 font-medium"
+        >
+          {user ? (
+            <div className="flex items-center">
+              <div>
+                <Avatar
+                  src={`${
+                    user.photoURL
+                      ? user.photoURL
+                      : "https://www.clipartkey.com/mpngs/m/197-1971414_avatars-clipart-generic-user-user-profile-icon.png"
+                  }`}
+                  alt="avatar"
+                />
+              </div>
+              <Tooltip content="Logout" placement="bottom-start">
+                <button className="ml-2" onClick={handleLogout}>
+                  <FaSignOutAlt className="h-8 w-8" />
+                </button>
+              </Tooltip>
+            </div>
+          ) : (
+            <>
+              <NavLink
+                to={"/login"}
+                className="flex items-center hover:text-orange-700 transition-colors"
+              >
+                <Button size="sm" variant="gradient">
+                  Login
+                </Button>
+              </NavLink>
+            </>
+          )}
+        </Typography>
+      </ul>
+    );
+  };
+
   return (
     <nav className=" backdrop-blur-lg bg-white/5  py-3">
       <div className="flex items-center justify-between text-blue-gray-900 container mx-auto">

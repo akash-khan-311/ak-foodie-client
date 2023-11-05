@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../../Shared/Header/Header";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const { login, googleLogin } = useContext(AuthContext);
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+
+    if (email.length === 0) {
+      toast.error("Enter Your Email");
+      return;
+    } else if (password.length === 0) {
+      toast.error("Enter Your Password");
+      return;
+    }
+
+    login(email, password)
+      .then((result) => {
+        const user = result.user;
+        toast.success("login successful");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin().then((result) => {
+      const user = result.user;
+    });
   };
   return (
     <div>
@@ -100,6 +125,7 @@ const Login = () => {
             </div>
 
             <button
+              onClick={handleGoogleLogin}
               type="button"
               className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md  font-medium bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-sm align-middle  transition-all text-sm   "
             >
