@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import AddFood from "../Pages/AddFood/AddFood";
 import AvailableFood from "../Pages/AvailableFood/AvailableFood";
 import ManageFood from "../Pages/ManageFood/ManageFood";
+import FoodDetails from "../Pages/FoodDetails/FoodDetails";
 
 const Router = createBrowserRouter([
   {
@@ -19,6 +20,12 @@ const Router = createBrowserRouter([
       { path: "/managefood", element: <ManageFood /> },
       { path: "/foodrequest", element: <ManageFood /> },
       { path: "/login", element: <Login /> },
+      {
+        path: "/foodDetails/:id",
+        element: <FoodDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/api/v1/food/${params.id}`),
+      },
       { path: "/register", element: <Register /> },
     ],
   },
