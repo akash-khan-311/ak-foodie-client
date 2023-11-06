@@ -35,7 +35,7 @@ const FoodDetails = () => {
   const [size, setSize] = useState(null);
 
   const handleOpen = (value) => setSize(value);
-console.log(food)
+
   const handleRequestFood = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -51,8 +51,9 @@ console.log(food)
       donatorImg,
       pickupLocation,
       expiredDate,
-      donationMoney: donationPrice,
-      aditionalNotes: newAditionalNotes,
+      aditionalNotes,
+      requesterDonate: donationPrice,
+      requesterNotes: newAditionalNotes,
       quantity,
       requesterName: user?.displayName,
       requesterImg: user?.photoURL,
@@ -67,7 +68,7 @@ console.log(food)
       .then((res) => {
         if (res.data.acknowledged) {
           swal("Good job!", "Food Request Successfully", "success");
-          handleOpen(null)
+          handleOpen(null);
         } else {
           swal("Oops!", " Something went wrong", "error");
         }

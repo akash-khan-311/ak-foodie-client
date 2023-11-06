@@ -19,7 +19,7 @@ const FoodRequest = () => {
         setRequestedFoods(res.data);
       });
   }, []);
-
+  console.log(requestedFoods);
   const handleCancelFood = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -102,8 +102,8 @@ const FoodRequest = () => {
                       <th scope="row" className="px-6 py-4  whitespace-nowrap ">
                         {food.foodName}
                       </th>
-                      <td className="px-6 py-4">{food.quantity}</td>
                       <td className="px-6 py-4">{food.donatorName}</td>
+                      <td className="px-6 py-4">{food.pickupLocation}</td>
                       <td className="px-6 py-4">{food.expiredDate}</td>
                       <td className="px-6 py-4">{food.requestDate}</td>
                       <td className="px-6 py-4">${food.donationMoney}</td>
