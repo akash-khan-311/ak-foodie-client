@@ -27,6 +27,7 @@ const FoodDetails = () => {
     expiredDate,
     quantity,
     aditionalNotes,
+    status,
   } = food;
 
   const [year, month, day] = expiredDate.split("-");
@@ -34,7 +35,7 @@ const FoodDetails = () => {
   const [size, setSize] = useState(null);
 
   const handleOpen = (value) => setSize(value);
-
+console.log(food)
   const handleRequestFood = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -58,6 +59,7 @@ const FoodDetails = () => {
       requesterEmail: user.email,
       requestDate,
       requested: true,
+      status,
     };
 
     axios

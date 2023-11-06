@@ -73,7 +73,7 @@ const Register = () => {
     <div>
       <Header />
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="relative flex flex-col text-white mx-auto backdrop-blur-md bg-white/10 shadow-md sm:w-96 max:w-80  rounded-xl bg-clip-border">
+      <div className="relative my-10 flex flex-col text-white mx-auto backdrop-blur-md bg-white/10 shadow-md sm:w-96 max:w-80  rounded-xl bg-clip-border">
         <div className="relative grid mx-4 mb-4  overflow-hidden text-white shadow-lg h-28 place-items-center rounded-xl bg-gradient-to-tr from-orange-600 to-orange-400 bg-clip-border ">
           <h3 className="block font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-white">
             Register
