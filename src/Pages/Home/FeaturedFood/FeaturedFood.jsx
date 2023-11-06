@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FeaturedFoodCard from "../../../components/FeaturedFoodCard/FeaturedFoodCard";
+import { Button } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const FeaturedFood = () => {
   const [foods, setFoods] = useState([]);
@@ -24,6 +26,13 @@ const FeaturedFood = () => {
         {foods.map((food) => (
           <FeaturedFoodCard key={food._id} food={food} />
         ))}
+      </div>
+      <div className="flex justify-center mt-10">
+        <Link href="#availablefood" to={"/availablefood"}>
+          <Button className="bg-gradient-to-tr  from-orange-600 to-orange-800">
+            See All food
+          </Button>
+        </Link>
       </div>
     </div>
   );

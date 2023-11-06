@@ -10,6 +10,7 @@ const AvailableFood = () => {
   const availableFoods = useLoaderData();
   const [filteredData, setFilteredData] = useState(availableFoods);
   const [searchValue, setSearchValue] = useState("");
+  const [ascending, setAscending] = useState(true);
 
   useEffect(() => {
     setFilteredData(availableFoods);
@@ -24,6 +25,18 @@ const AvailableFood = () => {
         .includes(searchValue.toLocaleLowerCase())
     );
     setFilteredData(result);
+  };
+
+  const handleSortByExpiredDate = () => {
+    const sortedData = [...filteredData]; // Create a copy to avoid mutating the original array
+    sortedData.sort((a, b) => {
+      const dateA = new Date(a.expiredDate);
+      const dateB = new Date(b.expiredDate);
+      return ascending ? dateA - dateB : dateB - dateA;
+    });
+
+    setFilteredData(sortedData);
+    setAscending(!ascending);
   };
 
   return (
@@ -53,7 +66,15 @@ const AvailableFood = () => {
               </Button>
             </div>
           </div>
-          <div className="text-white">Sort by quantiy</div>
+          <div className="text-white ">
+            <Button
+              onClick={handleSortByExpiredDate}
+              className="bg-gradient-to-tr  from-orange-600 to-orange-800"
+              size="sm"
+            >
+              sort by expired date
+            </Button>
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10 ">
           {filteredData.map((food) => (
