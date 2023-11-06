@@ -32,30 +32,30 @@ const AvailableFood = () => {
         <Header />
       </Headroom>
 
-      <div className="container mx-auto">
-        <div>
-          <div className="relative flex w-full gap-2 mt-10 border-b-4 border-orange-700 pb-5">
-            <Input
-              type="search"
-              onChange={(e) => handleSearch(e.target.value)}
-              color="white"
-              label="Type here..."
-              className="pr-20"
-              containerProps={{
-                className: "min-w-[288px]",
-              }}
-            />
-            <Button
-              size="sm"
-              color="white"
-              onClick={() => handleSearch(searchValue)}
-              className="!absolute right-1 top-1 rounded"
-            >
-              Search
-            </Button>
+      <div className="container mx-auto px-3 md:px-0">
+        <div className="flex justify-between items-center flex-col md:flex-row">
+          <div className="backdrop-blur-xl bg-white/10 p-8 mt-10 rounded-3xl">
+            <div className="relative flex w-full gap-2  border-b-4 border-orange-700 pb-5 ">
+              <Input
+                type="search"
+                onChange={(e) => handleSearch(e.target.value)}
+                color="white"
+                label="Type here..."
+                className="pr-20"
+              />
+              <Button
+                size="sm"
+                color="white"
+                onClick={() => handleSearch(searchValue)}
+                className="!absolute right-1 top-1 rounded"
+              >
+                Search
+              </Button>
+            </div>
           </div>
+          <div className="text-white">Sort by quantiy</div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10 ">
           {filteredData.map((food) => (
             <AvailableFoodCard food={food} key={food._id} />
           ))}

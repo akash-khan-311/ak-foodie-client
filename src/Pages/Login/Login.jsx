@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import Header from "../../Shared/Header/Header";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 
 const Login = () => {
   const { login, googleLogin } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -24,6 +27,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         toast.success("login successful");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);
@@ -31,9 +35,14 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    googleLogin().then((result) => {
-      const user = result.user;
-    });
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
   return (
     <div>

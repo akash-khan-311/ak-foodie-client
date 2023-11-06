@@ -3,6 +3,7 @@ import Headroom from "react-headroom";
 import Header from "../../Shared/Header/Header";
 
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Table from "../../components/Table/Table";
 
 const ManageFood = () => {
   const { user } = useContext(AuthContext);
@@ -22,6 +23,7 @@ const ManageFood = () => {
 
       <div>
         <h1 className="text-6xl text-white">{myFoods?.length}</h1>
+        <Table myFoods={myFoods} />
       </div>
     </div>
   );

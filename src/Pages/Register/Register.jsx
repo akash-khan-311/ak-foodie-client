@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
 import Header from "../../Shared/Header/Header";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Register = () => {
   const { register, updateUserProfile, googleLogin } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -41,15 +44,21 @@ const Register = () => {
       toast.error("Image URL is empty");
     }
 
-    register(email, password).then((result) => {
-      const user = result.user;
-      toast.success("Registration Success");
-      updateUserProfile(name)
-        .then()
-        .catch((err) => {
-          toast.error(err.message);
-        });
-    });
+    register(email, password)
+      .then((result) => {
+        const user = result.user;
+        toast.success("Registration Success");
+
+        updateUserProfile(name)
+          .then()
+          .catch((err) => {
+            toast.error(err.message);
+          });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   const handleGoogleLogin = () => {
@@ -57,6 +66,7 @@ const Register = () => {
       const user = result.user;
 
       toast.success("Login Success");
+      navigate(from, { replace: true });
     });
   };
   return (

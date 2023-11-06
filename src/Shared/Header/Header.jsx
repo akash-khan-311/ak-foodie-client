@@ -10,7 +10,7 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useContext, useEffect, useState } from "react";
 import logo from "../../assets/images/Logo.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
@@ -66,45 +66,51 @@ const Header = () => {
             Available Foods
           </NavLink>
         </Typography>
-        <Typography
-          as="li"
-          variant="small"
-          color="white"
-          className="p-1 font-medium"
-        >
-          <NavLink
-            to={"/addfood"}
-            className="flex items-center hover:text-orange-700 transition-colors"
-          >
-            Add Food
-          </NavLink>
-        </Typography>
-        <Typography
-          as="li"
-          variant="small"
-          color="white"
-          className="p-1 font-medium"
-        >
-          <NavLink
-            to={"/managefood"}
-            className="flex items-center hover:text-orange-700 transition-colors"
-          >
-            Manage My Foods
-          </NavLink>
-        </Typography>
-        <Typography
-          as="li"
-          variant="small"
-          color="white"
-          className="p-1 font-medium"
-        >
-          <NavLink
-            to={"/foodrequest"}
-            className="flex items-center hover:text-orange-700 transition-colors"
-          >
-            My Food Request
-          </NavLink>
-        </Typography>
+        {user ? (
+          <>
+            <Typography
+              as="li"
+              variant="small"
+              color="white"
+              className="p-1 font-medium"
+            >
+              <NavLink
+                to={"/addfood"}
+                className="flex items-center hover:text-orange-700 transition-colors"
+              >
+                Add Food
+              </NavLink>
+            </Typography>
+            <Typography
+              as="li"
+              variant="small"
+              color="white"
+              className="p-1 font-medium"
+            >
+              <NavLink
+                to={"/managefood"}
+                className="flex items-center hover:text-orange-700 transition-colors"
+              >
+                Manage My Foods
+              </NavLink>
+            </Typography>
+            <Typography
+              as="li"
+              variant="small"
+              color="white"
+              className="p-1 font-medium"
+            >
+              <NavLink
+                to={"/foodrequest"}
+                className="flex items-center hover:text-orange-700 transition-colors"
+              >
+                My Food Request
+              </NavLink>
+            </Typography>
+          </>
+        ) : (
+          ""
+        )}
         <Typography
           as="li"
           variant="small"
@@ -150,15 +156,15 @@ const Header = () => {
   };
 
   return (
-    <nav className=" backdrop-blur-lg bg-white/5  py-3">
+    <nav className=" backdrop-blur-lg bg-white/10  py-3">
       <div className="flex items-center justify-between text-blue-gray-900 container mx-auto">
         <Typography
-          as="a"
-          href="#"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5 flex items-center "
         >
-          <img src={logo} className="w-28" alt="" />
+          <Link to={"/"}>
+            <img src={logo} className="w-28" alt="" />
+          </Link>
         </Typography>
         <div className="hidden lg:block">
           <NavList />
