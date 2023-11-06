@@ -119,7 +119,7 @@ const Table = ({ myFoods }) => {
           <div className="">
             <div className="backdrop-blur-2xl bg-white/20 rounded-2xl py-10 flex items-center justify-center ">
               <h1 className="text-3xl md:text-4xl lg:text-5xl text-center text-white font-bold">
-                No Food Added
+                You have not donated any food
               </h1>
             </div>
           </div>
