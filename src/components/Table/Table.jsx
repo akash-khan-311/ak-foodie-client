@@ -57,7 +57,7 @@ const Table = ({ myFoods }) => {
         Header: "Manage",
 
         Cell: ({ cell }) => (
-          <Link to={"/"}>
+          <Link to={`/manage/${cell.row.original._id}`}>
             <Button
               className="bg-gradient-to-tr from-orange-600 to-orange-400"
               variant="gradient"
