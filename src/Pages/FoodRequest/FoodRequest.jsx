@@ -8,6 +8,7 @@ const FoodRequest = () => {
       <Headroom>
         <Header />
       </Headroom>
+      <div className="my-10"></div>
     </div>
   );
 };

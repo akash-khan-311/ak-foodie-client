@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
   if (loading) {
     return (
       <div className="flex justify-center items-start mx-auto">
-        <Spinner className="h-16 w-16 text-gray-900/50" />;
+        <Spinner className="h-16 w-16 text-orange-700" />;
       </div>
     );
   }

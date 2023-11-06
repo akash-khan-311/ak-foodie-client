@@ -21,8 +21,7 @@ const ManageFood = () => {
         <Header />
       </Headroom>
 
-      <div>
-        <h1 className="text-6xl text-white">{myFoods?.length}</h1>
+      <div className="my-10">
         <Table myFoods={myFoods} />
       </div>
     </div>

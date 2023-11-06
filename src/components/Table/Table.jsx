@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Table = ({ myFoods }) => {
   const data = useMemo(() => myFoods, [myFoods]);
-  console.log(myFoods);
+
   const columns = useMemo(
     () => [
       {
@@ -83,7 +83,10 @@ const Table = ({ myFoods }) => {
       <div className="container mx-auto table-container">
         {myFoods.length ? (
           <>
-            <table {...getTableProps()}>
+            <table
+              className="backdrop-blur-3xl bg-white/5"
+              {...getTableProps()}
+            >
               <thead className="bg-orange-700">
                 {headerGroups.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>

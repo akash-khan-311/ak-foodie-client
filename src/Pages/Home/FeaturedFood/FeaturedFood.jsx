@@ -12,7 +12,7 @@ const FeaturedFood = () => {
   }, []);
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto my-10">
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center text-white my-10">
         <span className="border-b-2 md:border-b-4 lg:border-b-8 border-orange-700">
           Featured
