@@ -12,8 +12,10 @@ import PrivateRoute from "./PrivateRoute";
 import FoodRequest from "../Pages/FoodRequest/FoodRequest";
 import ManageSingleFood from "../components/ManageSingleFood/ManageSingleFood";
 import UpdateFood from "../components/UpdateFood/UpdateFood";
+import NotFound from "../Pages/NotFound/NotFound";
 
 const Router = createBrowserRouter([
+  { path: "*", element: <NotFound /> },
   {
     path: "/",
     element: <Root />,

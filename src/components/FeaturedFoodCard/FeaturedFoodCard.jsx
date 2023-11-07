@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const FeaturedFoodCard = ({ food }) => {
-    
   const {
     foodName,
     foodImg,
@@ -18,19 +17,26 @@ const FeaturedFoodCard = ({ food }) => {
   const newQuantity = parseInt(quantity);
   return (
     <div>
-      <div class="relative flex  flex-col rounded-xl backdrop-blur-md bg-white/10 bg-clip-border text-white shadow-md">
-        <div class="relative h-72 overflow-hidden  bg-transparent rounded shadow-none bg-clip-border">
+      <div
+        data-aos="fade-up"
+        data-aos-offset="200"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+        className="relative flex  flex-col rounded-xl backdrop-blur-md bg-white/10 bg-clip-border text-white shadow-md"
+      >
+        <div className="relative h-72 overflow-hidden  bg-transparent rounded shadow-none bg-clip-border">
           <img
             src={foodImg}
             className="h-full w-full"
             alt="ui/ux review check"
           />
         </div>
-        <div class="p-6">
-          <h4 class="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal border-b-2 border-orange-700">
+        <div className="p-6">
+          <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal border-b-2 border-orange-700">
             {foodName.toUpperCase()}
           </h4>
-          <div class="block mt-3 font-sans  antialiased font-normal leading-relaxed ">
+          <div className="block mt-3 font-sans  antialiased font-normal leading-relaxed ">
             <div className="flex items-center justify-between border-b-2 pb-3 border-orange-700">
               <h1 className="text-white text-lg">{donatorName}</h1>
               <img className="w-10 h-10 rounded-full" src={donatorImg} alt="" />
@@ -57,7 +63,7 @@ const FeaturedFoodCard = ({ food }) => {
             </p>
           </div>
         </div>
-        <div class="flex items-center justify-between p-6">
+        <div className="flex items-center justify-between p-6">
           <Link to={`/foodDetails/${_id}`} className="w-full">
             <Button
               size="sm"

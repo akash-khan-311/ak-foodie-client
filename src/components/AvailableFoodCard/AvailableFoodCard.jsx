@@ -17,7 +17,14 @@ const AvailableFoodCard = ({ food }) => {
   return (
     <div>
       <div>
-        <div className="relative flex  flex-col rounded-xl backdrop-blur-md bg-white/10 bg-clip-border text-white shadow-md">
+        <div
+          data-aos="fade-down"
+          data-aos-offset="200"
+          data-aos-delay="50"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+          className="relative flex  flex-col rounded-xl backdrop-blur-md bg-white/10 bg-clip-border text-white shadow-md"
+        >
           <div className="relative h-72 overflow-hidden  bg-transparent rounded shadow-none bg-clip-border">
             <img
               src={foodImg}

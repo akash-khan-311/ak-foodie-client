@@ -51,7 +51,14 @@ const AvailableFood = () => {
 
       <div className="container mx-auto px-3 md:px-0">
         <div className="flex justify-between items-center flex-col md:flex-row">
-          <div className="backdrop-blur-xl bg-white/10 p-8 mt-10 rounded-3xl">
+          <div
+            data-aos="fade-down"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            className="backdrop-blur-xl bg-white/10 p-8 mt-10 rounded-3xl"
+          >
             <div className="relative flex w-full gap-2  border-b-4 border-orange-700 pb-5 ">
               <Input
                 type="search"
@@ -70,7 +77,14 @@ const AvailableFood = () => {
               </Button>
             </div>
           </div>
-          <div className="text-white ">
+          <div
+            data-aos="fade-up"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            className="text-white "
+          >
             <Button
               onClick={handleSortByExpiredDate}
               className="bg-gradient-to-tr  from-orange-600 to-orange-800"
