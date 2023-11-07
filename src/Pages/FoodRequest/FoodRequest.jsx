@@ -5,6 +5,7 @@ import axios from "axios";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Button } from "@material-tailwind/react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const FoodRequest = () => {
   const [requestedFoods, setRequestedFoods] = useState([]);
@@ -54,9 +55,12 @@ const FoodRequest = () => {
     });
   };
   const isAvailable = (status) => status === "available";
-
+  console.log(requestedFoods);
   return (
     <div>
+      <Helmet>
+        <title>My Food Request</title>
+      </Helmet>
       <Headroom>
         <Header />
       </Headroom>
@@ -65,7 +69,7 @@ const FoodRequest = () => {
           {requestedFoods.length > 0 ? (
             <div className="relative overflow-x-hidden  sm:rounded-lg">
               <table className="w-full text-sm text-left ">
-                <thead className="text-xs whitespace-nowrap  bg-gradient-to-tr from-orange-700 to-orange-900 uppercase  ">
+                <thead className="text-xs   bg-gradient-to-tr from-orange-700 to-orange-900 uppercase  ">
                   <tr>
                     <th scope="col" className="px-6 py-3 ">
                       Food Name
@@ -106,14 +110,14 @@ const FoodRequest = () => {
                       <td className="px-6 py-4">{food.pickupLocation}</td>
                       <td className="px-6 py-4">{food.expiredDate}</td>
                       <td className="px-6 py-4">{food.requestDate}</td>
-                      <td className="px-6 py-4">${food.donationMoney}</td>
+                      <td className="px-6 py-4">${food.requesterDonate}</td>
                       <td className="px-6 py-4 text-green-200 font-bold">
                         {food.status.toUpperCase()}
                       </td>
                       <td className="px-6 py-4 text-right">
                         <Button
                           onClick={() => handleCancelFood(food._id)}
-                          // disabled={!isAvailable(food.status)}
+                          disabled={!isAvailable(food.status)}
                           className="font-medium text-white  bg-red-500"
                         >
                           Cancel

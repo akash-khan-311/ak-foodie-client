@@ -13,7 +13,6 @@ const Table = ({ myFoods }) => {
   const [displayMyFoods, setDisplayMyFoods] = useState(myFoods);
   const data = useMemo(() => displayMyFoods, [displayMyFoods]);
 
-
   const handleRemove = (_id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -48,12 +47,10 @@ const Table = ({ myFoods }) => {
     });
   };
 
+  useEffect(() => {
+    setDisplayMyFoods(myFoods);
+  }, [myFoods]);
 
-  
-    useEffect(() => {
-      setDisplayMyFoods(myFoods);
-    }, [myFoods]);
-    console.log(displayMyFoods);
   const columns = useMemo(
     () => [
       {
@@ -76,13 +73,11 @@ const Table = ({ myFoods }) => {
         Header: "Edit",
 
         Cell: ({ cell }) => (
-          <Button
-            variant="gradient"
-            size="sm"
-            onClick={() => handleRemove(cell.row.original.status)}
-          >
-            Edit
-          </Button>
+          <Link to={`/update/${cell.row.original._id}`}>
+            <Button variant="gradient" size="sm">
+              Edit
+            </Button>
+          </Link>
         ),
       },
       {

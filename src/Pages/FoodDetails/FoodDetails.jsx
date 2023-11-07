@@ -13,6 +13,7 @@ import {
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import axios from "axios";
 import swal from "sweetalert";
+import { Helmet } from "react-helmet";
 
 const FoodDetails = () => {
   const food = useLoaderData();
@@ -84,6 +85,9 @@ const FoodDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{foodName}</title>
+      </Helmet>
       <Headroom>
         <Header />
       </Headroom>

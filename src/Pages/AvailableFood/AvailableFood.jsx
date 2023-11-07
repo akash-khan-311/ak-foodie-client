@@ -5,6 +5,7 @@ import { useLoaderData } from "react-router-dom";
 import AvailableFoodCard from "../../components/AvailableFoodCard/AvailableFoodCard";
 
 import { Button, Input } from "@material-tailwind/react";
+import { Helmet } from "react-helmet";
 
 const AvailableFood = () => {
   const availableFoods = useLoaderData();
@@ -41,6 +42,9 @@ const AvailableFood = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Available Foods</title>
+      </Helmet>
       <Headroom>
         <Header />
       </Headroom>

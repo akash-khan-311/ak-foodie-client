@@ -5,6 +5,7 @@ import { Button } from "@material-tailwind/react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import swal from "sweetalert";
+import { Helmet } from "react-helmet";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
@@ -52,6 +53,9 @@ const AddFood = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Add Food</title>
+      </Helmet>
       <Headroom>
         <Header />
       </Headroom>

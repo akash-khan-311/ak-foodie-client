@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Headroom from "react-headroom";
 import Header from "../../Shared/Header/Header";
-
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Table from "../../components/Table/Table";
+import { Helmet } from "react-helmet";
 
 const ManageFood = () => {
   const { user } = useContext(AuthContext);
@@ -17,6 +17,9 @@ const ManageFood = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Manage Food</title>
+      </Helmet>
       <Headroom>
         <Header />
       </Headroom>
