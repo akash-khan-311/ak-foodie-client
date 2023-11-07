@@ -15,10 +15,21 @@ const FoodRequest = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/v1/requestfood/${email}`)
+      .get(
+        `https://foodie-fellowship-server.vercel.app/api/v1/requestfood/${email}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         setRequestedFoods(res.data);
       });
+
+    // fetch(`https://foodie-fellowship-server.vercel.app/api/v1/requestfood/${email}`, {
+    //   credentials: 'include',
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => setRequestedFoods(data));
   }, []);
   console.log(requestedFoods);
   const handleCancelFood = (id) => {
@@ -32,9 +43,12 @@ const FoodRequest = () => {
       confirmButtonText: "Yes, Cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/v1/deleted/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://foodie-fellowship-server.vercel.app/api/v1/deleted/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

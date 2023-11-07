@@ -46,7 +46,31 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log("user", currentUser);
+
       setLoading(false);
+      const userEmail = currentUser?.email || user?.email;
+      const logedUser = { email: userEmail };
+      if (currentUser) {
+        fetch("https://foodie-fellowship-server.vercel.app/api/v1/jwt", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(logedUser),
+          credentials: "include",
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      } else {
+
+        
+        fetch("https://foodie-fellowship-server.vercel.app/api/v1/logout", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(logedUser),
+          credentials: "include",
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
+      }
     });
     return () => unSubscribe();
   }, []);

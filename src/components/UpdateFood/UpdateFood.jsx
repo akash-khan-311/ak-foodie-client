@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import Headroom from "react-headroom";
 import { useLoaderData } from "react-router-dom";
 import Header from "../../Shared/Header/Header";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
+
 import { Button } from "@material-tailwind/react";
 import swal from "sweetalert";
 import { Helmet } from "react-helmet";
+import useAuth from "../../Hooks/useAuth";
 
 const UpdateFood = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const food = useLoaderData();
   const {
     email,
@@ -51,23 +52,19 @@ const UpdateFood = () => {
       aditionalNotes,
     };
 
-      fetch(`http://localhost:3000/api/v1/update/${_id}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(newFood),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.modifiedCount > 0) {
-              swal("Good job!", "Your Food Added!", "success");
-             
-            }
-          
-        });
-
-  
+    fetch(`https://foodie-fellowship-server.vercel.app/api/v1/update/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newFood),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          swal("Good job!", "Your Food Added!", "success");
+        }
+      });
   };
 
   return (

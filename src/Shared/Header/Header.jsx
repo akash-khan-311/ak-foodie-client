@@ -8,13 +8,14 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useContext, useEffect, useState } from "react";
 import logo from "../../assets/images/Logo.png";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { FaSignOutAlt } from "react-icons/fa";
+import useAuth from "../../Hooks/useAuth";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Header = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -30,7 +31,7 @@ const Header = () => {
     };
   }, []);
 
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useAuth();
 
   const handleLogout = () => {
     logout().then(() => {

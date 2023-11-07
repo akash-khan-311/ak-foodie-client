@@ -22,13 +22,15 @@ const Router = createBrowserRouter([
       {
         path: "/availablefood",
         element: <AvailableFood />,
-        loader: () => fetch("http://localhost:3000/api/v1/availablefoods"),
+        loader: () =>
+          fetch(
+            "https://foodie-fellowship-server.vercel.app/api/v1/availablefoods"
+          ),
       },
       {
         path: "/addfood",
         element: (
           <PrivateRoute>
-            {" "}
             <AddFood />
           </PrivateRoute>
         ),
@@ -37,7 +39,6 @@ const Router = createBrowserRouter([
         path: "/managefood",
         element: (
           <PrivateRoute>
-            {" "}
             <ManageFood />
           </PrivateRoute>
         ),
@@ -59,7 +60,9 @@ const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/api/v1/food/${params.id}`),
+          fetch(
+            `https://foodie-fellowship-server.vercel.app/api/v1/food/${params.id}`
+          ),
       },
       {
         path: "/manage/:id",
@@ -69,7 +72,9 @@ const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/api/v1/manage/${params.id}`),
+          fetch(
+            `https://foodie-fellowship-server.vercel.app/api/v1/manage/${params.id}`
+          ),
       },
       {
         path: "/update/:id",
@@ -79,7 +84,9 @@ const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/api/v1/manage/${params.id}`),
+          fetch(
+            `https://foodie-fellowship-server.vercel.app/api/v1/manage/${params.id}`
+          ),
       },
       { path: "/register", element: <Register /> },
     ],

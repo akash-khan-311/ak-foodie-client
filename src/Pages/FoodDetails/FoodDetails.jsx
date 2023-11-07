@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Headroom from "react-headroom";
 
 import { useLoaderData } from "react-router-dom";
@@ -10,14 +10,16 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
+
 import axios from "axios";
 import swal from "sweetalert";
 import { Helmet } from "react-helmet";
+import useAuth from "../../Hooks/useAuth";
 
 const FoodDetails = () => {
   const food = useLoaderData();
-  const { user } = useContext(AuthContext);
+
+  const { user } = useAuth();
   const {
     foodName,
     foodImg,
@@ -65,7 +67,10 @@ const FoodDetails = () => {
     };
 
     axios
-      .post("http://localhost:3000/api/v1/requestfood", requestFood)
+      .post(
+        "https://foodie-fellowship-server.vercel.app/api/v1/requestfood",
+        requestFood
+      )
       .then((res) => {
         if (res.data.acknowledged) {
           swal("Good job!", "Food Request Successfully", "success");

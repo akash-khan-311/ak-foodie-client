@@ -1,18 +1,23 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Headroom from "react-headroom";
 import Header from "../../Shared/Header/Header";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
+
 import Table from "../../components/Table/Table";
 import { Helmet } from "react-helmet";
 
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
+
 const ManageFood = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [myFoods, setMyFoods] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  const url = `/myfood?email=${user?.email}`;
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/myfood?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setMyFoods(data));
+    axiosSecure.get(url).then((res) => {
+      setMyFoods(res.data);
+    });
   }, [user]);
 
   return (

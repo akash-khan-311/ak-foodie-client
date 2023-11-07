@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import Header from "../../Shared/Header/Header";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
-  const { login, googleLogin } = useContext(AuthContext);
+  const { login, googleLogin } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";

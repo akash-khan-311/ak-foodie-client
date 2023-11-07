@@ -1,14 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "../../Shared/Header/Header";
 import Headroom from "react-headroom";
 import { Button } from "@material-tailwind/react";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
-import Swal from "sweetalert2";
+
 import swal from "sweetalert";
 import { Helmet } from "react-helmet";
+import useAuth from "../../Hooks/useAuth";
 
 const AddFood = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   const handleAddFood = (e) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ const AddFood = () => {
       aditionalNotes,
     };
 
-    fetch("http://localhost:3000/api/v1/addfood", {
+    fetch("https://foodie-fellowship-server.vercel.app/api/v1/addfood", {
       method: "POST",
       headers: {
         "content-type": "application/json",
