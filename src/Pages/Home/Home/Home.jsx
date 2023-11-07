@@ -3,6 +3,7 @@ import Banner from "../Banner/Banner";
 import FeaturedFood from "../FeaturedFood/FeaturedFood";
 import { Helmet } from "react-helmet";
 import LatestNews from "../LatestNews/LatestNews";
+import Contact from "../Contact/Contact";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Banner />
       <FeaturedFood />
       <LatestNews />
+      <Contact />
     </div>
   );
 };
