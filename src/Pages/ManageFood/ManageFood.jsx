@@ -14,7 +14,7 @@ const ManageFood = () => {
       .then((res) => res.json())
       .then((data) => setMyFoods(data));
   }, [user]);
-console.log(myFoods)
+
   return (
     <div>
       <Headroom>

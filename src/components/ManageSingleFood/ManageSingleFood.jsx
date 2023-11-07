@@ -3,6 +3,8 @@ import Headroom from "react-headroom";
 import { useLoaderData } from "react-router-dom";
 import Header from "../../Shared/Header/Header";
 import { Button, Option, Select } from "@material-tailwind/react";
+import axios from "axios";
+import swal from "sweetalert";
 
 const ManageSingleFood = () => {
   const manageSingleFood = useLoaderData();
@@ -18,14 +20,28 @@ const ManageSingleFood = () => {
     quantity,
     aditionalNotes,
     status,
+    _id,
   } = manageSingleFood;
+  const newStatus = { selectedValue };
   const [year, month, day] = expiredDate.split("-");
   const newExpiredDate = `${day}-${month}-${year}`;
 
   const handleSelect = (e) => {
     setSelectedValue(e.target.value);
   };
-  console.log(selectedValue)
+
+  const handleSubmitStatus = () => {
+    axios
+      .patch(`http://localhost:3000/api/v1/manage/${_id}`, newStatus)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          swal("Good Job!", "Status Changes Successfully", "success");
+        } else {
+          swal("oops!", "status already has available status", "error");
+        }
+      });
+  };
+  console.log(selectedValue);
   return (
     <div>
       <Headroom>
@@ -91,13 +107,11 @@ const ManageSingleFood = () => {
                       Food Status
                     </label>
                     <select
-                    onChange={handleSelect}
+                      onChange={handleSelect}
                       id="countries"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
-                      <option value={status}>
-                        {status}
-                      </option>
+                      <option value={status}>{status}</option>
                       <option value="delivered">delivered </option>
                     </select>
                   </div>
@@ -105,10 +119,10 @@ const ManageSingleFood = () => {
               </ul>
             </div>
             <Button
-              onClick={() => handleOpen("xl")}
+              onClick={handleSubmitStatus}
               className="bg-gradient-to-tr from-orange-600 to-orange-400 w-full"
             >
-              Request Food
+              Update Status
             </Button>
           </div>
         </div>

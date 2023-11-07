@@ -4,10 +4,56 @@ import { useTable } from "react-table";
 import "./Table.css";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
+import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 const Table = ({ myFoods }) => {
-  const data = useMemo(() => myFoods, [myFoods]);
+  const [displayMyFoods, setDisplayMyFoods] = useState(myFoods);
+  const data = useMemo(() => displayMyFoods, [displayMyFoods]);
 
+
+  const handleRemove = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/api/v1/deleted/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              const remainingManageFoods = myFoods.filter(
+                (food) => food._id !== _id
+              );
+              setDisplayMyFoods(remainingManageFoods);
+
+              // setDisplayMyFoods(remainingManageFoods);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Food Has Been Deleted!",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
+
+
+  
+    useEffect(() => {
+      setDisplayMyFoods(myFoods);
+    }, [myFoods]);
+    console.log(displayMyFoods);
   const columns = useMemo(
     () => [
       {
@@ -33,7 +79,7 @@ const Table = ({ myFoods }) => {
           <Button
             variant="gradient"
             size="sm"
-            onClick={() => handleStatusClick(cell.row.original.status)}
+            onClick={() => handleRemove(cell.row.original.status)}
           >
             Edit
           </Button>
@@ -47,7 +93,7 @@ const Table = ({ myFoods }) => {
             variant="gradient"
             size="sm"
             className="bg-gradient-to-tr from-red-600 to-red-400"
-            onClick={() => handleStatusClick(cell.row.original.status)}
+            onClick={() => handleRemove(cell.row.original._id)}
           >
             Delete
           </Button>
@@ -62,7 +108,6 @@ const Table = ({ myFoods }) => {
               className="bg-gradient-to-tr from-orange-600 to-orange-400"
               variant="gradient"
               size="sm"
-              onClick={() => handleStatusClick(cell.row.original._id)}
             >
               Manage
             </Button>
@@ -72,9 +117,6 @@ const Table = ({ myFoods }) => {
     ],
     [data]
   );
-  const handleStatusClick = (remove) => {
-    console.log(remove);
-  };
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
