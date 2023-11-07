@@ -41,8 +41,10 @@ const Register = () => {
       return;
     } else if (!/^(?=.*[!@#$%^&*])/.test(password)) {
       toast.error("Paassword Must Have a Special Character");
+      return;
     } else if (image.length === 0) {
       toast.error("Image URL is empty");
+      return;
     }
 
     register(email, password)
@@ -50,7 +52,7 @@ const Register = () => {
         const user = result.user;
         toast.success("Registration Success");
 
-        updateUserProfile(name)
+        updateUserProfile(name, image)
           .then()
           .catch((err) => {
             toast.error(err.message);
@@ -172,7 +174,7 @@ const Register = () => {
               type="submit"
               data-ripple-light="true"
             >
-              Login
+              Register
             </button>
           </form>
         </div>

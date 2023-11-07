@@ -19,8 +19,11 @@ const Banner = () => {
               data-aos-duration="1000"
               data-aos-easing="ease-in-out"
             >
-              Nourishing Neighbors, Building{" "}
-              <span className="text-orange-700 italic">Bonds</span>
+              Share the Love, Share the Food, and Join Our Foodie Fellowship!{" "}
+              <span className="text-orange-700 italic">
+                {" "}
+                Foodie Fellowship!
+              </span>
             </h1>
             <p
               className="text-lg"

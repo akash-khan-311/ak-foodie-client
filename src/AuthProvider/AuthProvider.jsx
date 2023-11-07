@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
       displayName: name,
       photoURL: photo,
     });
-  };
+  }; 
 
   const logout = () => {
     setLoading(true);
