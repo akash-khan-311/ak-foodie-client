@@ -52,7 +52,7 @@ const UpdateFood = () => {
       aditionalNotes,
     };
 
-    fetch(`https://foodie-fellowship-server.vercel.app/api/v1/update/${_id}`, {
+    fetch(`http://localhost:3000/api/v1/update/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

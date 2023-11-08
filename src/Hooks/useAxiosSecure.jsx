@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const axiosSecure = axios.create({
-  baseURL: "https://foodie-fellowship-server.vercel.app/api/v1",
+  baseURL: "http://localhost:3000/api/v1",
   withCredentials: true,
 });
 const useAxiosSecure = () => {

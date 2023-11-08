@@ -31,8 +31,10 @@ const FoodDetails = () => {
     quantity,
     aditionalNotes,
     status,
+    email,
+    _id,
   } = food;
-
+  console.log(food);
   const [year, month, day] = expiredDate.split("-");
   const newExpiredDate = `${day}-${month}-${year}`;
   const [size, setSize] = useState(null);
@@ -48,31 +50,19 @@ const FoodDetails = () => {
     const requestDate = form.requestDate.value;
 
     const requestFood = {
-      foodName,
-      foodImg,
-      donatorName,
-      donatorImg,
-      pickupLocation,
-      expiredDate,
-      aditionalNotes,
       requesterDonate: donationPrice,
       requesterNotes: newAditionalNotes,
-      quantity,
       requesterName: user?.displayName,
       requesterImg: user?.photoURL,
       requesterEmail: user.email,
       requestDate,
       requested: true,
-      status,
     };
 
     axios
-      .post(
-        "https://foodie-fellowship-server.vercel.app/api/v1/requestfood",
-        requestFood
-      )
+      .patch(`http://localhost:3000/api/v1/requestfood/${_id}`, requestFood)
       .then((res) => {
-        if (res.data.acknowledged) {
+        if (res.data.modifiedCount > 0) {
           swal("Good job!", "Food Request Successfully", "success");
           handleOpen(null);
         } else {

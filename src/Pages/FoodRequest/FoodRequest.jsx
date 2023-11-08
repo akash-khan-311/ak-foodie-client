@@ -15,24 +15,34 @@ const FoodRequest = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://foodie-fellowship-server.vercel.app/api/v1/requestfood/${email}`,
-        {
-          withCredentials: true,
-        }
-      )
+      .get(`http://localhost:3000/api/v1/requestfood/${email}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setRequestedFoods(res.data);
       });
 
-    // fetch(`https://foodie-fellowship-server.vercel.app/api/v1/requestfood/${email}`, {
+    // fetch(`http://localhost:3000/api/v1/requestfood/${email}`, {
     //   credentials: 'include',
     // })
     //   .then((res) => res.json())
     //   .then((data) => setRequestedFoods(data));
   }, []);
-  console.log(requestedFoods);
-  const handleCancelFood = (id) => {
+
+  const handleCancelFood = (food) => {
+    console.log(food);
+
+    const {
+      requesterDonate,
+      requesterNotes,
+      requesterName,
+      requesterImg,
+      requesterEmail,
+      requestDate,
+      requested,
+      _id,
+    } = food;
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -43,15 +53,22 @@ const FoodRequest = () => {
       confirmButtonText: "Yes, Cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(
-          `https://foodie-fellowship-server.vercel.app/api/v1/deleted/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`http://localhost:3000/api/v1/updated/${_id}`, {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            requesterDonate,
+            requesterNotes,
+            requesterName,
+            requesterImg,
+            requesterEmail,
+            requestDate,
+            requested,
+          }),
+        })
           .then((res) => res.json())
           .then((data) => {
-            if (data.deletedCount > 0) {
+            if (data.modifiedCount > 0) {
               Swal.fire({
                 title: "Canceled!",
                 text: "Food Request Has Been Cancelled!",
@@ -59,7 +76,7 @@ const FoodRequest = () => {
               });
 
               const remainingFoodRequest = requestedFoods.filter(
-                (food) => food._id !== id
+                (food) => food._id !== _id
               );
 
               setRequestedFoods(remainingFoodRequest);
@@ -69,7 +86,7 @@ const FoodRequest = () => {
     });
   };
   const isAvailable = (status) => status === "available";
-  console.log(requestedFoods);
+
   return (
     <div>
       <Helmet>
@@ -130,7 +147,7 @@ const FoodRequest = () => {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <Button
-                          onClick={() => handleCancelFood(food._id)}
+                          onClick={() => handleCancelFood(food)}
                           disabled={!isAvailable(food.status)}
                           className="font-medium text-white  bg-red-500"
                         >

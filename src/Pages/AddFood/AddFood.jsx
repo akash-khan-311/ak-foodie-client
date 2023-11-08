@@ -36,7 +36,7 @@ const AddFood = () => {
       aditionalNotes,
     };
 
-    fetch("https://foodie-fellowship-server.vercel.app/api/v1/addfood", {
+    fetch("http://localhost:3000/api/v1/addfood", {
       method: "POST",
       headers: {
         "content-type": "application/json",

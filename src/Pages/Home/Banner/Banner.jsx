@@ -19,7 +19,7 @@ const Banner = () => {
               data-aos-duration="1000"
               data-aos-easing="ease-in-out"
             >
-              Share the Love, Share the Food, and Join Our Foodie Fellowship!{" "}
+              Share the Love, Share the Food, and Join Our{" "}
               <span className="text-orange-700 italic">
                 {" "}
                 Foodie Fellowship!

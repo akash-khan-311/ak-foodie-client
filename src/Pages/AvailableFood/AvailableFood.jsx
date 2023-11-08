@@ -18,7 +18,7 @@ const AvailableFood = () => {
   }, [availableFoods]);
 
   const handleSearch = (search) => {
-    setSearchValue(search);
+   
 
     const result = availableFoods.filter((food) =>
       food.foodName
@@ -62,7 +62,7 @@ const AvailableFood = () => {
             <div className="relative flex w-full gap-2  border-b-4 border-orange-700 pb-5 ">
               <Input
                 type="search"
-                onChange={(e) => handleSearch(e.target.value)}
+                onChange={(e) => setSearchValue(e.target.value)}
                 color="white"
                 label="Type here..."
                 className="pr-20"

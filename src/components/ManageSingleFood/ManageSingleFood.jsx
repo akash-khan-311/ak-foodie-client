@@ -33,10 +33,7 @@ const ManageSingleFood = () => {
 
   const handleSubmitStatus = () => {
     axios
-      .patch(
-        `https://foodie-fellowship-server.vercel.app/api/v1/manage/${_id}`,
-        newStatus
-      )
+      .patch(`http://localhost:3000/api/v1/manage/${_id}`, newStatus)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           swal("Good Job!", "Status Changes Successfully", "success");
