@@ -18,8 +18,6 @@ const AvailableFood = () => {
   }, [availableFoods]);
 
   const handleSearch = (search) => {
-   
-
     const result = availableFoods.filter((food) =>
       food.foodName
         .toLocaleLowerCase()
@@ -38,6 +36,11 @@ const AvailableFood = () => {
 
     setFilteredData(sortedData);
     setAscending(!ascending);
+  };
+  const handleEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -63,6 +66,7 @@ const AvailableFood = () => {
               <Input
                 type="search"
                 onChange={(e) => setSearchValue(e.target.value)}
+                onKeyPress={handleEnterKeyPress}
                 color="white"
                 label="Type here..."
                 className="pr-20"
