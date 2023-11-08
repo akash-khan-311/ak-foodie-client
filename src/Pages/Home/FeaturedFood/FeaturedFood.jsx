@@ -8,9 +8,11 @@ const FeaturedFood = () => {
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/featuredfoods").then((res) => {
-      setFoods(res.data);
-    });
+    axios
+      .get("https://foodie-fellowship-server.vercel.app/api/v1/featuredfoods")
+      .then((res) => {
+        setFoods(res.data);
+      });
   }, []);
 
   return (

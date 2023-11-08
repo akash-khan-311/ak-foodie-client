@@ -15,14 +15,17 @@ const FoodRequest = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/v1/requestfood/${email}`, {
-        withCredentials: true,
-      })
+      .get(
+        `https://foodie-fellowship-server.vercel.app/api/v1/requestfood/${email}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         setRequestedFoods(res.data);
       });
 
-    // fetch(`http://localhost:3000/api/v1/requestfood/${email}`, {
+    // fetch(`https://foodie-fellowship-server.vercel.app/api/v1/requestfood/${email}`, {
     //   credentials: 'include',
     // })
     //   .then((res) => res.json())
@@ -53,19 +56,22 @@ const FoodRequest = () => {
       confirmButtonText: "Yes, Cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/v1/updated/${_id}`, {
-          method: "PATCH",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            requesterDonate,
-            requesterNotes,
-            requesterName,
-            requesterImg,
-            requesterEmail,
-            requestDate,
-            requested,
-          }),
-        })
+        fetch(
+          `https://foodie-fellowship-server.vercel.app/api/v1/updated/${_id}`,
+          {
+            method: "PATCH",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              requesterDonate,
+              requesterNotes,
+              requesterName,
+              requesterImg,
+              requesterEmail,
+              requestDate,
+              requested,
+            }),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.modifiedCount > 0) {

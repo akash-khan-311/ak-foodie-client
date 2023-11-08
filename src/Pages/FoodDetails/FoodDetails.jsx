@@ -60,7 +60,10 @@ const FoodDetails = () => {
     };
 
     axios
-      .patch(`http://localhost:3000/api/v1/requestfood/${_id}`, requestFood)
+      .patch(
+        `https://foodie-fellowship-server.vercel.app/api/v1/requestfood/${_id}`,
+        requestFood
+      )
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           swal("Good job!", "Food Request Successfully", "success");

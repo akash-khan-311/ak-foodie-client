@@ -51,7 +51,7 @@ const AuthProvider = ({ children }) => {
       const userEmail = currentUser?.email || user?.email;
       const logedUser = { email: userEmail };
       if (currentUser) {
-        fetch("http://localhost:3000/api/v1/jwt", {
+        fetch("https://foodie-fellowship-server.vercel.app/api/v1/jwt", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(logedUser),
@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
           .then((res) => res.json())
           .then((data) => console.log(data));
       } else {
-        fetch("http://localhost:3000/api/v1/logout", {
+        fetch("https://foodie-fellowship-server.vercel.app/api/v1/logout", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(logedUser),
